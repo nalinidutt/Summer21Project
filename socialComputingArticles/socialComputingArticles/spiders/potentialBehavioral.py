@@ -1,4 +1,5 @@
 import scrapy
+import sumy
 
 class SocialcomputingarticlesItem(scrapy.Item):
     # define the fields for your item here like:
