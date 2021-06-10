@@ -10,6 +10,8 @@ from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lex_rank import LexRankSummarizer
 
+summarizer = LexRankSummarizer()
+
 class SocialcomputingarticlesItem(scrapy.Item):
     title = scrapy.Field()
     author = scrapy.Field()
@@ -36,6 +38,8 @@ class BehavioralscientistCrawlSpider(CrawlSpider):
         else:
             if response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p[1]/text()').get() is not None:
                 title = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/header/h1/text()').get()
+                author = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/header/div[2]/div[1]/div[1]/text()').get()
+                date = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/header/div[2]/div[1]/div[2]/text()').get()
                 intro = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p[1]/text()').get()
                 paragraphs = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p/text()').getall()
 
