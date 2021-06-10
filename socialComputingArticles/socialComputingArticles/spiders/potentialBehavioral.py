@@ -1,4 +1,5 @@
 # testing out xpaths, summary, etc, for 1 article, then will apply to crawl spiders
+# OUTPUT: potentialBehaviorInfo.json
 
 import scrapy
 import sumy
