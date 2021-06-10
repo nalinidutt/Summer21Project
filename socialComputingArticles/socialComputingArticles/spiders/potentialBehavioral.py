@@ -1,3 +1,5 @@
+# testing out xpaths, summary, etc, for 1 article, then will apply to crawl spiders
+
 import scrapy
 import sumy
 
@@ -32,6 +34,8 @@ class PotentialbehaviorSummSpider(scrapy.Spider):
         
         title = response.xpath('//*[@id="post-16220"]/header/h1/text()').get()
         intro = response.xpath('//*[@id="post-16220"]/div[2]/blockquote[1]/p/strong/text()').get()
+        date = response.xpath('//*[@id="post-16220"]/header/div[2]/div[1]/div[2]/text()').get()
+        author = response.xpath('//*[@id="post-16220"]/header/div[2]/div[1]/div[1]/a/text()').get()
         
         textParser = PlaintextParser.from_string(intro, Tokenizer('english'))
         summary = summarizer(textParser.document, 2)
@@ -41,6 +45,8 @@ class PotentialbehaviorSummSpider(scrapy.Spider):
         
         item = SocialcomputingarticlesItem()
         item["title"] = title
+        item["author"] = author
+        item["date"] = date
         item["intro"] = intro
         item["finalSummary"] = finalSummary
         yield item
