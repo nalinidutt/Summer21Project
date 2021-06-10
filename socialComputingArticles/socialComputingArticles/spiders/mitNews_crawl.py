@@ -5,7 +5,6 @@ from scrapy.spiders import CrawlSpider, Rule
 class SocialcomputingarticlesItem(scrapy.Item):
     title = scrapy.Field()
     summary = scrapy.Field()
-    headings = scrapy.Field()
 
 class mitNewsCrawlSpider(CrawlSpider):
     # variables
