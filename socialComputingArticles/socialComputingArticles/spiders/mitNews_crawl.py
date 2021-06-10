@@ -24,7 +24,6 @@ class mitNewsCrawlSpider(CrawlSpider):
     # variables
     n = 100 # number of pages
     count = 0 # counter
-    finalSummary = ''
     
     name = 'mitNews_crawl'
     allowed_domains = ['news.mit.edu']
@@ -33,6 +32,9 @@ class mitNewsCrawlSpider(CrawlSpider):
     rules = (Rule(LinkExtractor(allow=r'/'), callback='parse_item', follow=True)),
 
     def parse_item(self, response):
+        fullText = ''
+        finalSummary = ''
+        
         if self.count >= self.n:
             raise CloseSpider('all done')
         else:
