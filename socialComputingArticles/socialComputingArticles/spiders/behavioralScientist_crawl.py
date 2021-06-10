@@ -1,4 +1,4 @@
-# OUTPUT: behvScieInfo.csv
+# OUTPUT: behvScieInfo.json
 
 import scrapy
 from scrapy.linkextractors import LinkExtractor
@@ -32,13 +32,14 @@ class BehavioralscientistCrawlSpider(CrawlSpider):
 
     def parse_item(self, response):
         finalSummary = ''
+        authorStr = ''
         
         if self.count >= self.n:
             raise CloseSpider('all done')
         else:
             if response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p[1]/text()').get() is not None:
                 title = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/header/h1/text()').get()
-                author = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/header/div[2]/div[1]/div[1]/text()').get()
+                authors = response.xpath('/html/body/div/div[2]/div/div/main/div[2]/div[1]/div[1]/div/div[2]/h4/a/text()').getall()
                 date = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/header/div[2]/div[1]/div[2]/text()').get()
                 intro = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p[1]/text()').get()
                 paragraphs = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p/text()').getall()
@@ -46,7 +47,7 @@ class BehavioralscientistCrawlSpider(CrawlSpider):
                 fullText = intro
                 
                 for paragraph in paragraphs:
-                    fullText+= paragraph
+                    fullText += paragraph
                 
                 textParser = PlaintextParser.from_string(fullText, Tokenizer('english'))
                 summary = summarizer(textParser.document, 2)    # can change number of sentences
@@ -58,7 +59,7 @@ class BehavioralscientistCrawlSpider(CrawlSpider):
 
                 item = SocialcomputingarticlesItem()
                 item["title"] = title
-                item["author"] = author
+                item["author"] = authors
                 item["date"] = date
                 item["intro"] = intro
                 item["finalSummary"] = finalSummary
