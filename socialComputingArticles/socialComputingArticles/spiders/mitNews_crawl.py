@@ -55,6 +55,8 @@ class mitNewsCrawlSpider(CrawlSpider):
                 for sentence in summary:
                     finalSummary += str(sentence)
 
+                self.count +=1
+                
                 item = SocialcomputingarticlesItem()
                 item["title"] = title
                 item["author"] = author
