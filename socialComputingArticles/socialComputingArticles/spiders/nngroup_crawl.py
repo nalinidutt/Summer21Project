@@ -23,7 +23,7 @@ class SocialcomputingarticlesItem(scrapy.Item):
 
 class NngroupCrawlSpider(CrawlSpider):
     # variables
-    n = 10 # number of pages
+    n = 100 # number of pages
     count = 0 # counter
     
     name = 'nngroup_crawl'
