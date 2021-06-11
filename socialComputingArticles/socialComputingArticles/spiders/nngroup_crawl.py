@@ -43,8 +43,8 @@ class NngroupCrawlSpider(CrawlSpider):
             if response.xpath('/html/body/main/section/div/div/div/article/div/div[1]/section[1]/p/text()').get() is not None:
                 title = response.xpath('/html/body/main/section/div/div/div/article/h1/text()').get()
                 author = response.xpath('//*[@id="body-content"]/article/div/div[1]/section[2]/div[1]/div[1]/ul/li/a/text()').get()
-                date = response.xpath('//*[@id="body-content"]/article/div/div[1]/section[2]/div[1]/div[1]/div/p/text()').get()
-                topics = response.xpath('//*[@id="body-content"]/article/div/div[1]/section[2]/div[1]/div[2]/ul/li/text()').getall()
+                date = response.xpath('//*[@id="body-content"]/article/div/div[1]/section[2]/div[1]/div[1]/div/p/span/text()').get()
+                topics = response.xpath('//*[@id="body-content"]/article/div/div[1]/section[2]/div[1]/div[2]/ul/li/a/text()').getall()
                 miniSummary = response.xpath('/html/body/main/section/div/div/div/article/div/div[1]/section[1]/p/text()').get()
                 paragraphs = response.xpath('//*[@id="articleBody"]/p/text()').getall()
                 
