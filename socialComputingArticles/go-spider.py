@@ -1,8 +1,8 @@
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
-from weather.spiders.weather_spider import WeatherSpiderSpider
+from socialComputingArticles.spiders.#spider_name import # <spider_class_name>
 
 process = CrawlerProcess(get_project_settings())
-process.crawl(WeatherSpiderSpider)
+process.crawl(# <spider_class_name>)
 process.start()
