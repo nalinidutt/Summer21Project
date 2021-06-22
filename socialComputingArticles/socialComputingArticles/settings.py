@@ -62,9 +62,14 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'socialComputingArticles.pipelines.SocialcomputingarticlesPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'socialComputingArticles.pipelines.SocialcomputingarticlesPipeline': 600,
+}
+
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "scrapyUrls"
+MONGODB_COLLECTION = "urls1"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
