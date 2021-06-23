@@ -57,30 +57,30 @@ class mitNewsCrawlSpider(CrawlSpider):
             raise CloseSpider('all done')
         else:
             if doc is None:
-            if response.xpath('//*[@id="block-mit-content"]/div/article/div/div[1]/span/text()').get() is not None:
-                title = response.xpath('//*[@id="block-mit-page-title"]/div/h1/span/text()').get()
-                author = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[3]/span[1]/text()').get()
-                date = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[4]/time/text()').get()
-                miniSummary = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[1]/span/text()').get()
+                if response.xpath('//*[@id="block-mit-content"]/div/article/div/div[1]/span/text()').get() is not None:
+                    title = response.xpath('//*[@id="block-mit-page-title"]/div/h1/span/text()').get()
+                    author = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[3]/span[1]/text()').get()
+                    date = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[4]/time/text()').get()
+                    miniSummary = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[1]/span/text()').get()
 
-                paragraphs = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[7]/div[1]/div/div/p/text()').getall()
+                    paragraphs = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[7]/div[1]/div/div/p/text()').getall()
 
-                for paragraph in paragraphs:
-                    fullText+= paragraph
+                    for paragraph in paragraphs:
+                        fullText+= paragraph
 
-                textParser = PlaintextParser.from_string(fullText, Tokenizer('english'))
-                summary = summarizer(textParser.document, 2)    # can change number of sentences
+                    textParser = PlaintextParser.from_string(fullText, Tokenizer('english'))
+                    summary = summarizer(textParser.document, 2)    # can change number of sentences
 
-                for sentence in summary:
-                    finalSummary += str(sentence)
+                    for sentence in summary:
+                        finalSummary += str(sentence)
 
-                self.count +=1
+                    self.count +=1
 
-                item = SocialcomputingarticlesItem()
-                item["title"] = title
-                item["author"] = author
-                item["date"] = date
-                item["miniSummary"] = miniSummary
-                item["finalSummary"] = finalSummary
-                item["url"] = response.url
-                return item
+                    item = SocialcomputingarticlesItem()
+                    item["title"] = title
+                    item["author"] = author
+                    item["date"] = date
+                    item["miniSummary"] = miniSummary
+                    item["finalSummary"] = finalSummary
+                    item["url"] = response.url
+                    return item
