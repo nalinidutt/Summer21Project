@@ -1,6 +1,9 @@
 # OUTPUT: mitNewsInfo.csv
 
 # import pandas as pd
+import pymongo
+
+collection = db["urls1"]
 
 import scrapy
 from scrapy.linkextractors import LinkExtractor
@@ -44,11 +47,14 @@ class mitNewsCrawlSpider(CrawlSpider):
     def parse_item(self, response):
         fullText = ''
         finalSummary = ''
+        query = { "url": response.url }
+        
+        doc = collection.find(query)
         
         if self.count >= self.n:
             raise CloseSpider('all done')
         else:
-            #if response.url in urls:
+            if doc is None:
             if response.xpath('//*[@id="block-mit-content"]/div/article/div/div[1]/span/text()').get() is not None:
                 title = response.xpath('//*[@id="block-mit-page-title"]/div/h1/span/text()').get()
                 author = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[3]/span[1]/text()').get()
