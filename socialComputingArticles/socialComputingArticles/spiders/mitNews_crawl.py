@@ -3,6 +3,8 @@
 # import pandas as pd
 import pymongo
 
+client = pymongo.MongoClient()
+db = client["scrapyUrls"]
 collection = db["urls1"]
 
 import scrapy
