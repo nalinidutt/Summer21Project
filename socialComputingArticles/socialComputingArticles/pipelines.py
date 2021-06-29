@@ -5,37 +5,34 @@
 
 # useful for handling different item types with a single interface
 import pymongo
-from itemadapter import ItemAdapter
-from scrapy.utils.project import get_project_settings
-from scrapy.exceptions import DropItem
-import logging
+# from itemadapter import ItemAdapter
+# from scrapy.utils.project import get_project_settings
 # from scrapy.exporters import JsonItemExporter
 
-class SocialcomputingarticlesPipeline (object):
+class SocialcomputingarticlesPipeline (object):  
     
-    def __init__(self):        
-        #self.file = open('behvScieInfo2.json', 'wb')
-        
-        #self.exporter = JsonItemExporter(self.file, encoding='utf-8', ensure_ascii=False)
-        #self.exporter.start_exporting()
-        #print('file opened')
-        settings = get_project_settings()
-        
-        connection = pymongo.MongoClient(
-            settings.get('MONGODB_SERVER'),
-            settings.get('MONGODB_PORT')
+    collection_name = 'mitNews'
+    def __init__(self, mongo_uri, mongo_db):
+        self.mongo_uri = mongo_uri
+        self.mongo_db = mongo_db
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            mongo_uri = crawler.settings.get('MONGO_URI'),
+            mongo_db = crawler.settings.get('MONGO_DB', 'scrapyItems')
         )
-        db = connection[settings.get('MONGODB_DB')]
-        self.collection = db[settings.get('MONGODB_COLLECTION')]
-        
+
+    def open_spider(self, spider):
+        self.client = pymongo.MongoClient(self.mongo_uri, ssl = True)
+        self.db = self.client[self.mongo_db]
+        self.db[self.collection_name].delete_many({})
+
+    def close_spider(self, spider):
+        self.client.close()
+
     def process_item(self, item, spider):
-        # self.exporter.export_item(item)
-        valid = True
-        for data in item:
-            if not data:
-                valid = False
-                raise DropItem("Missing {0}!".format(data))
-        if valid:
-            self.collection.insert(dict(item))
-            logging.info("URL added to MongoDB database!")
+        count = self.db[self.collection_name].count({"url": item["url"]})
+        if (count == 0):
+            self.db[self.collection_name].insert_one(dict(item))
         return item
