@@ -1,4 +1,5 @@
 # OUTPUT: mitNewsInfo.csv
+# MongoDB collection: mitNews
 
 # import pandas as pd
 import pymongo
