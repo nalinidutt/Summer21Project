@@ -1,4 +1,5 @@
 # OUTPUT: behvScieInfo.json
+# MongoDB Collection: behvScie
 
 import scrapy
 from scrapy.linkextractors import LinkExtractor
