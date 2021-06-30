@@ -18,6 +18,8 @@ class SocialcomputingarticlesItem(scrapy.Item):
     date = scrapy.Field()
     intro = scrapy.Field()
     finalSummary = scrapy.Field()
+    fullText = scrapy.Field()
+    url = scrapy.Field()
 
 class BehavioralscientistCrawlSpider(CrawlSpider):
     # variables
@@ -63,5 +65,7 @@ class BehavioralscientistCrawlSpider(CrawlSpider):
                 item["date"] = date
                 item["intro"] = intro
                 item["finalSummary"] = finalSummary
+                item["fullText"] = fullText
+                item["url"] = response.url
                 return item
 
