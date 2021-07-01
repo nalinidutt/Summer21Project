@@ -6,4 +6,4 @@ RUN python -c "import nltk; nltk.download('punkt')"
 
 COPY . .
 
-CMD [ "scrapy", "crawl", "mitNews_crawl" ]
+CMD [ "scrapy", "crawl", "<spider name>" ]
