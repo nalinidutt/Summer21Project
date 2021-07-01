@@ -62,9 +62,18 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'socialComputingArticles.pipelines.SocialcomputingarticlesPipeline': 300,
-#}
+# FILE_NAME = '../behvScieInfo2.json'
+#FEED_FORMAT = 'json'
+#FEED_URI = 'behvScieInfo2.json'
+ITEM_PIPELINES = {
+    'socialComputingArticles.pipelines.SocialcomputingarticlesPipeline': 600,
+}
+
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "scrapyItems"
+MONGODB_COLLECTION = "mitNews"
+MONGO_URI = 'mongodb+srv://main:darkchocolate@scrapy1.c7o2f.mongodb.net/test?authSource=admin&replicaSet=atlas-d5330y-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true&ssl_cert_reqs=CERT_NONE'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

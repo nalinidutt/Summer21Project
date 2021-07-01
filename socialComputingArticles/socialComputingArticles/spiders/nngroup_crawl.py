@@ -1,4 +1,5 @@
-# OUTPUT: nngroupInfo.csv
+# LOCAL OUTPUT: nngroupInfo.csv
+# MongoDB Collection: nnGroup
 
 import scrapy
 from scrapy.linkextractors import LinkExtractor
@@ -20,6 +21,8 @@ class SocialcomputingarticlesItem(scrapy.Item):
     topics = scrapy.Field()
     miniSummary = scrapy.Field()
     finalSummary = scrapy.Field()
+    fullText = scrapy.Field()
+    url = scrapy.Field()
 
 class NngroupCrawlSpider(CrawlSpider):
     # variables
@@ -69,4 +72,6 @@ class NngroupCrawlSpider(CrawlSpider):
                 item["topics"] = allTopics
                 item["miniSummary"] = miniSummary
                 item["finalSummary"] = finalSummary
+                item["fullText"] = fullText
+                item["url"] = response.url
                 return item

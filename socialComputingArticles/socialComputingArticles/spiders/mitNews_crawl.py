@@ -1,4 +1,8 @@
 # OUTPUT: mitNewsInfo.csv
+# MongoDB collection: mitNews
+
+# import pandas as pd
+import pymongo
 
 import scrapy
 from scrapy.linkextractors import LinkExtractor
@@ -13,12 +17,20 @@ from sumy.summarizers.lex_rank import LexRankSummarizer
 
 summarizer = LexRankSummarizer()
 
+"""
+colnames = ['author', 'date', 'finalSummary', 'miniSummary', 'title', 'url']
+data = pd.read_csv('mitNewsInfo.csv', names=colnames)
+urls = data.url.tolist()
+"""
+
 class SocialcomputingarticlesItem(scrapy.Item):
     title = scrapy.Field()
     miniSummary = scrapy.Field()
     author = scrapy.Field()
     date = scrapy.Field()
     finalSummary = scrapy.Field()
+    fullText = scrapy.Field()
+    url = scrapy.Field()
 
 class mitNewsCrawlSpider(CrawlSpider):
     # variables
@@ -43,7 +55,7 @@ class mitNewsCrawlSpider(CrawlSpider):
                 author = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[3]/span[1]/text()').get()
                 date = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[4]/time/text()').get()
                 miniSummary = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[1]/span/text()').get()
-                
+
                 paragraphs = response.xpath('//*[@id="block-mit-content"]/div/article/div/div[7]/div[1]/div/div/p/text()').getall()
 
                 for paragraph in paragraphs:
@@ -56,16 +68,13 @@ class mitNewsCrawlSpider(CrawlSpider):
                     finalSummary += str(sentence)
 
                 self.count +=1
-                
+
                 item = SocialcomputingarticlesItem()
                 item["title"] = title
                 item["author"] = author
                 item["date"] = date
                 item["miniSummary"] = miniSummary
                 item["finalSummary"] = finalSummary
+                item["fullText"] = fullText
+                item["url"] = response.url
                 return item
-            
-            
-            
-            
-            
