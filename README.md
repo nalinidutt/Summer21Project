@@ -6,8 +6,9 @@ Web scraping articles and summarizing info with python
 * pymongo
 * numpy
 * pymongo[srv]
-## Build Docker image
+## Build Docker Image
 `docker build -t <tag> .`
+Tag can only be lowercase
 ## Sources (main domains)
 * https://news.mit.edu/topic/human-computer-interaction
 * https://behavioralscientist.org/topics/technology/
