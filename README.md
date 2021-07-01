@@ -1,9 +1,13 @@
 # Summer 2021 Project
 Web scraping articles and summarizing info with python
 ## Requirements
-scrapy and sumy should be installed
-## Run spider
-`scrapy crawl <spider name> -o <output name>`
+* scrapy
+* sumy
+* pymongo
+* numpy
+* pymongo[srv]
+## Build Docker image
+`docker build -t <tag> .`
 ## Sources (main domains)
 * https://news.mit.edu/topic/human-computer-interaction
 * https://behavioralscientist.org/topics/technology/
