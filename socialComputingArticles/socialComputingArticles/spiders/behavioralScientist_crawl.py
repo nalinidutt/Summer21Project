@@ -46,6 +46,9 @@ class BehavioralscientistCrawlSpider(CrawlSpider):
                 date = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/header/div[2]/div[1]/div[2]/text()').get()
                 intro = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p[1]/text()').get()
                 paragraphs = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p/text()').getall()
+                
+                for author in authors:
+                    authorStr += (author + ", ")
 
                 fullText = intro
                 
@@ -62,7 +65,7 @@ class BehavioralscientistCrawlSpider(CrawlSpider):
 
                 item = SocialcomputingarticlesItem()
                 item["title"] = title
-                item["author"] = authors
+                item["author"] = authorStr
                 item["date"] = date
                 item["intro"] = intro
                 item["finalSummary"] = finalSummary
