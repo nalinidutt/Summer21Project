@@ -48,7 +48,7 @@ class BehavioralscientistCrawlSpider(CrawlSpider):
                 paragraphs = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p/text()').getall()
                 
                 for author in authors:
-                    authorStr += (author + ", ")
+                    authorStr += (" " + author)
 
                 fullText = intro
                 
@@ -72,4 +72,3 @@ class BehavioralscientistCrawlSpider(CrawlSpider):
                 item["fullText"] = fullText
                 item["url"] = response.url
                 return item
-
