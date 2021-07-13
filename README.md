@@ -6,6 +6,8 @@ Web scraping articles and summarizing info with python
 * pymongo
 * numpy
 * pymongo[srv]
+## Build Spider
+`scrapy genspider -t <template> <name> <domain>`
 ## Build Docker Image
 `docker build -t <tag> .`
 Tag can only be lowercase

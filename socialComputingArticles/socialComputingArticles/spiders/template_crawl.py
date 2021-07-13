@@ -1,12 +1,11 @@
-# OUTPUT: behvScieInfo.json
-# MongoDB Collection: behvScie
+# LOCAL OUTPUT: 
+# MongoDB Collection: 
 
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.exceptions import CloseSpider
 
-import sumy
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lex_rank import LexRankSummarizer
@@ -17,58 +16,60 @@ class SocialcomputingarticlesItem(scrapy.Item):
     title = scrapy.Field()
     author = scrapy.Field()
     date = scrapy.Field()
-    intro = scrapy.Field()
+    topics = scrapy.Field()
+    miniSummary = scrapy.Field()
     finalSummary = scrapy.Field()
     fullText = scrapy.Field()
     url = scrapy.Field()
 
-class BehavioralscientistCrawlSpider(CrawlSpider):
+class <spider name>Spider(CrawlSpider):
     # variables
     n = 100 # number of pages
     count = 0 # counter
     
-    name = 'behavioralScientist_crawl'
-    allowed_domains = ['behavioralscientist.org']
-    start_urls = ['https://behavioralscientist.org/topics/technology/']
+    name = ''
+    allowed_domains = ['']
+    start_urls = ['']
 
-    rules = (Rule(LinkExtractor(allow=r'/'), callback='parse_item', follow=True),)
+    rules = (Rule(LinkExtractor(allow=r'/'), callback='parse_item', follow=True)),
 
     def parse_item(self, response):
+        fullText = ''
         finalSummary = ''
-        authorStr = ''
+        allTopics = ''
         
         if self.count >= self.n:
             raise CloseSpider('all done')
         else:
-            if response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p[1]/text()').get() is not None:
-                title = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/header/h1/text()').get()
-                authors = response.xpath('/html/body/div/div[2]/div/div/main/div[2]/div[1]/div[1]/div/div[2]/h4/a/text()').getall()
-                date = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/header/div[2]/div[1]/div[2]/text()').get()
-                intro = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p[1]/text()').get()
-                paragraphs = response.xpath('/html/body/div/div[2]/div/div/main/div[1]/div[1]/article/div/p/text()').getall()
+            if response.xpath('').get() is not None:
+                title = response.xpath('').get()
+                author = response.xpath('').get()
+                date = response.xpath('').get()
+                topics = response.xpath('').getall()
+                miniSummary = response.xpath('').get()
+                paragraphs = response.xpath('').getall()
                 
-                for author in authors:
-                    authorStr += (" " + author)
-
-                fullText = intro
+                for topic in topics:
+                    allTopics += (topic + ', ')
                 
                 for paragraph in paragraphs:
-                    fullText += paragraph
-                
+                    fullText+= paragraph
+
                 textParser = PlaintextParser.from_string(fullText, Tokenizer('english'))
                 summary = summarizer(textParser.document, 2)    # can change number of sentences
 
                 for sentence in summary:
                     finalSummary += str(sentence)
-                
+                    
                 if finalSummary is not None:
                     self.count +=1
 
                     item = SocialcomputingarticlesItem()
                     item["title"] = title
-                    item["author"] = authorStr
+                    item["author"] = author
                     item["date"] = date
-                    item["intro"] = intro
+                    item["topics"] = allTopics
+                    item["miniSummary"] = miniSummary
                     item["finalSummary"] = finalSummary
                     item["fullText"] = fullText
                     item["url"] = response.url
