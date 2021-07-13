@@ -1,6 +1,6 @@
 # "a" = append
 
-from createSpider import spiderName, template, domain, start_url
+from createSpider import spiderName, template, domain, start_url, titleX, authorX, dateX, paragraphsX
 
 fileName = spiderName + ".py"
 
@@ -39,19 +39,17 @@ with open("createSpider.py", "a") as f:
         
         f.write("\n        fullText = ''")
         f.write("\n        finalSummary = ''")
-        f.write("\n        allTopics = ''")
         
         f.write("\n")
         
         f.write("\n        if self.count >= self.n:")
         f.write("\n            raise CloseSpider('all done')")
         f.write("\n        else:")
-        f.write("\n            if response.xpath('/html/body/main/section/div/div/div/article/div/div[1]/section[1]/p/text()').get() is not None:")
-        f.write("\n                title = response.xpath('/html/body/main/section/div/div/div/article/h1/text()').get()")
-        f.write("\n                author = response.xpath('//*[@id=" + "body-content" + "]/article/div/div[1]/section[2]/div[1]/div[1]/ul/li/a/text()').get()")
-        f.write("\n                date = response.xpath('//*[@id=" + "body-content" + "]/article/div/div[1]/section[2]/div[1]/div[1]/div/p/span/text()').get()")
-        f.write("\n                miniSummary = response.xpath('/html/body/main/section/div/div/div/article/div/div[1]/section[1]/p/text()').get()")
-        f.write("\n                paragraphs = response.xpath('//*[@id=" + "articleBody" + "]/p/text()').getall()")
+        f.write("\n            if response.xpath('" + paragraphsX + "').get() is not None:")
+        f.write("\n                title = response.xpath('" + titleX + "').get()")
+        f.write("\n                author = response.xpath('" + authorX + "').get()")
+        f.write("\n                date = response.xpath('" + dateX + "').get()")
+        f.write("\n                paragraphs = response.xpath('" + paragraphsX + "').getall()")
         
         f.write("\n")
         
@@ -85,7 +83,4 @@ with open("createSpider.py", "a") as f:
         f.write("\n                    return item")
     
     
-    
-    
-    
-    
+ 
