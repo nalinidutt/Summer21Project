@@ -60,15 +60,16 @@ class BehavioralscientistCrawlSpider(CrawlSpider):
 
                 for sentence in summary:
                     finalSummary += str(sentence)
-                    
-                self.count +=1
+                
+                if finalSummary is not None:
+                    self.count +=1
 
-                item = SocialcomputingarticlesItem()
-                item["title"] = title
-                item["author"] = authorStr
-                item["date"] = date
-                item["intro"] = intro
-                item["finalSummary"] = finalSummary
-                item["fullText"] = fullText
-                item["url"] = response.url
-                return item
+                    item = SocialcomputingarticlesItem()
+                    item["title"] = title
+                    item["author"] = authorStr
+                    item["date"] = date
+                    item["intro"] = intro
+                    item["finalSummary"] = finalSummary
+                    item["fullText"] = fullText
+                    item["url"] = response.url
+                    return item
