@@ -12,7 +12,7 @@ authorX = input("Enter author XPath: ")
 dateX = input("Enter date XPath: ")
 paragraphsX = input("Enter paragraphs XPath: ")
 
-commandP = "scrapy genspider -t crawl " + spiderName + " " + domain
+commandP = "scrapy genspider -t " + template + " " + spiderName + " " + domain
 
 os.system('cmd /k ' + commandP)
 # os.system('cmd /k "editSpider.py"')
