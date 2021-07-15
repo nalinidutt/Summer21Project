@@ -17,6 +17,18 @@ commandP = "scrapy genspider -t crawl " + spiderName + " " + domain
 os.system('cmd /k ' + commandP)
 # os.system('cmd /k "editSpider.py"')
 
+"""
+spiderName = "google_crawl5"
+template = "crawl"
+domain = "google.com"
+start_url = "google.com"
+
+titleX = "h1"
+authorX = "h2"
+dateX = "h3"
+paragraphsX = "h4"
+"""
+
 fileName = "C:/Users/nalin/scrapy projects/socialComputingArticles/socialComputingArticles/spiders/" + spiderName + ".py"
 
 spiderClassName = spiderName.split("_")
@@ -29,6 +41,9 @@ for section in spiderClassName:
     spiderClassNameF += sectionf
 
 with open(fileName, "a") as f:
+    # clearing content
+    f.truncate(0)
+    
     # scrapy import statements
     f.write("\nimport scrapy\nfrom scrapy.linkextractors import LinkExtractor\nfrom scrapy.spiders import CrawlSpider, Rule\nfrom scrapy.exceptions import CloseSpider")
     
