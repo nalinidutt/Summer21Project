@@ -1,3 +1,4 @@
+import os
 
 print("Welcome to Scrapy Spider Creator")
 
@@ -11,4 +12,6 @@ authorX = input("Enter author XPath: ")
 dateX = input("Enter date XPath: ")
 paragraphsX = input("Enter paragraphs XPath: ")
 
-# DOCKERFILE: scrapy genspider -t template spiderName domain
+commandP = "scrapy genspider -t crawl " + spiderName + domain
+
+os.system('cmd /k ' + commandP)
