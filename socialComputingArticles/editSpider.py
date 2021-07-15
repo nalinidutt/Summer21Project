@@ -2,7 +2,7 @@
 
 from createSpider import spiderName, template, domain, start_url, titleX, authorX, dateX, paragraphsX
 
-fileName = spiderName + ".py"
+fileName = "/socialComputingArticles/spiders/" + spiderName + ".py"
 
 spiderClassName = spiderName.split("_")
 spiderClassNameF = ""
@@ -13,7 +13,7 @@ for section in spiderClassName:
     
     spiderClassNameF += sectionf
 
-with open("createSpider.py", "a") as f:
+with open(fileName, "a") as f:
     # scrapy import statements
     f.write("\nimport scrapy\nfrom scrapy.linkextractors import LinkExtractor\nfrom scrapy.spiders import CrawlSpider, Rule\nfrom scrapy.exceptions import CloseSpider")
     
@@ -83,4 +83,7 @@ with open("createSpider.py", "a") as f:
         f.write("\n                    return item")
     
     
- 
+    
+    
+    
+    
