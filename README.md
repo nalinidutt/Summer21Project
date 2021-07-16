@@ -10,7 +10,7 @@ Web scraping articles and summarizing info with python. Run `createSpider.py` to
 `docker build -t <tag> .` Tag can only be lowercase
 ## Run Docker Image (interactive)
 `docker run -it <tag>`
-## Sources (main domains)
+## Sources (start urls)
 * https://news.mit.edu/topic/human-computer-interaction
 * https://behavioralscientist.org/topics/technology/
 * https://www.nngroup.com/topic/human-computer-interaction/#articles
