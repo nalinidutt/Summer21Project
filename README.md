@@ -14,3 +14,4 @@ Web scraping articles and summarizing info with python. Run `createSpider.py` to
 * https://news.mit.edu/topic/human-computer-interaction
 * https://behavioralscientist.org/topics/technology/
 * https://www.nngroup.com/topic/human-computer-interaction/#articles
+* https://medium.com/topic/ux
