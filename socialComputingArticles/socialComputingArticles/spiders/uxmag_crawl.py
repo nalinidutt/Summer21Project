@@ -34,19 +34,19 @@ class UxmagCrawlSpider(CrawlSpider):
         else:
             if response.xpath('//*[@id="panel-article-node-page"]/div/div[3]/div/div[1]/div/div[1]/div/div/div/p/text()').get() is not None:
                 title = response.xpath('//*[@id="panel-article-node-page"]/div/div[2]/div/div/div/div[1]/h1/text()').get()
-                author = response.xpath('//*[@id="panel-article-node-page"]/div/div[2]/div/div/div/div[3]/p/text()').get()
-                date = response.xpath('//*[@id="panel-article-node-page"]/div/div[2]/div/div/div/div[3]/p/text()').get()
+                author = response.xpath('//*[@id="panel-article-node-page"]/div/div[2]/div/div/div/div[4]/p/text()').get()
+                date = response.xpath('//*[@id="panel-article-node-page"]/div/div[2]/div/div/div/div[4]/p/text()').get()
                 paragraphs = response.xpath('//*[@id="panel-article-node-page"]/div/div[3]/div/div[1]/div/div[1]/div/div/div/p/text()').getall()
                 
                 authorIndx = author.find("by ")
-                author -= author[:authorIndx]
-                author -= author[:3]
+                author = author.replace(author[:authorIndx], "")
+                author = author.replace(author[:3], "")
                 
                 dateIndx1 = date.find(" | by ")
-                date -= date[dateIndx1:]
+                date = date.replace(date[dateIndx1:], "")
                 dateIndx2 = date.find(" | ")
-                date -= date[:dateIndx2]
-                date -= date[:3]
+                date = date.replace(date[:dateIndx2], "")
+                date = date.replace(date[:3], "")
 
                 for paragraph in paragraphs:
                     fullText+= paragraph
