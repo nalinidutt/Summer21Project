@@ -46,7 +46,7 @@ class UxmagCrawlSpider(CrawlSpider):
                 date -= date[dateIndx1:]
                 dateIndx2 = date.find(" | ")
                 date -= date[:dateIndx2]
-                date = -= date[:3]
+                date -= date[:3]
 
                 for paragraph in paragraphs:
                     fullText+= paragraph
