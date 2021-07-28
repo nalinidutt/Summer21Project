@@ -8,7 +8,7 @@ Web scraping articles and summarizing info with python. Run `createSpider.py` to
 * numpy
 ## Build Docker Image
 `docker build -t <tag> .` Tag can only be lowercase
-### Checklist before building image
+#### Checklist before building image
 * Rename collection in `pipelines.py`
 * Edit spider name in Dockerfile
 ## Run Docker Image (interactive)
