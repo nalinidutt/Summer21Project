@@ -1,17 +1,19 @@
 # Summer 2021 Project
-Web scraping articles and summarizing info with python
+Web scraping articles and summarizing info with python. Run `createSpider.py` to generate new spider
 ## Requirements
 * scrapy
 * sumy
 * pymongo
-* numpy
 * pymongo[srv]
-## Build Spider
-`scrapy genspider -t <template> <name> <domain>`
+* numpy
 ## Build Docker Image
-`docker build -t <tag> .`
-Tag can only be lowercase
-## Sources (main domains)
+`docker build -t <tag> .` Tag can only be lowercase
+## Run Docker Image (interactive)
+`docker run -it <tag>`
+## Sources (start urls)
 * https://news.mit.edu/topic/human-computer-interaction
 * https://behavioralscientist.org/topics/technology/
 * https://www.nngroup.com/topic/human-computer-interaction/#articles
+* https://medium.com/topic/ux
+* https://www.uxbooth.com/articles/
+* https://uxmag.com/articles
