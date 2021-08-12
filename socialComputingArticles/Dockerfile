@@ -1,9 +1,12 @@
 FROM python:3.9
 
-RUN pip install scrapy sumy pandas pymongo
-RUN pip install pymongo[srv]
+# WORKDIR /code
+
+RUN pip install sumy scrapy pymongo numpy pymongo[srv]
 RUN python -c "import nltk; nltk.download('punkt')"
 
 COPY . .
 
-CMD [ "scrapy", "crawl", "<spider name>" ]
+ENTRYPOINT [ "scrapy" ]
+
+CMD [ "crawl", "<spider name>" ]
