@@ -2,10 +2,9 @@ import scrapy
 
 class WeatherItem(scrapy.Item):
     # define the fields for your item here like:
-    city = scrapy.Field()
-    temp = scrapy.Field()
-    cond = scrapy.Field()
-    uv = scrapy.Field()
+    # word = scrapy.Field()
+    wordType = scrapy.Field()
+    definition = scrapy.Field()
 
 class GoogledefSpider(scrapy.Spider):
     name = 'googleDef'
@@ -13,27 +12,21 @@ class GoogledefSpider(scrapy.Spider):
     # start_urls = ['http://google.com/']
     
     def start_requests(self):
-        # Weather.com URL for Charlotte's weather
-        urls = ["https://weather.com/weather/today/l/d1ffcaa6f03d9444be57cc3c00bb996859df6be82a64f748f4ec3834a25fcaba"]
+        # urls for defs
+        urls = ["https://www.merriam-webster.com/dictionary/extra"]
         
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse_url)
 
 
     def parse_url(self, response):
-        # Extracting city, temperature, air quality and condition from the response using XPath
-        city = response.xpath('').get()
-        temp = response.xpath('').get()
-        cond = response.xpath('').get()
-        uv = response.xpath('').get()
-        
-        city = city.replace(' Weather', '')
-        temp += 'F'
+        # word = response.xpath('').get()
+        wordType = response.xpath('//*[@id="left-content"]/div[1]/div[1]/span/a/text()').get()
+        definition = response.xpath('//*[@id="dictionary-entry-1"]/div[2]/div[1]/span[1]/div/span[2]/span[1]/text()').get()
         
         item = WeatherItem()
-        item["city"] = city
-        item["temp"] = temp
-        item["cond"] = cond
-        item["uv"] = uv
+        # item["word"] = word
+        item["wordType"] = wordType
+        item["definition"] = definition
         yield item
 
